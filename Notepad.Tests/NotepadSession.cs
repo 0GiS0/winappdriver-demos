@@ -8,7 +8,8 @@ namespace Notepad.Tests
 {
     public class NotepadSession
     {
-        protected const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723";
+        //protected const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723"; //for WinAppDriver.exe
+        protected const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723/wd/hub"; //for Appium
         private const string NotepadAppId = @"C:\Windows\System32\notepad.exe";
 
         protected static WindowsDriver<WindowsElement> session;
@@ -22,6 +23,8 @@ namespace Notepad.Tests
                 // Create a new session to launch Notepad application
                 DesiredCapabilities appCapabilities = new DesiredCapabilities();
                 appCapabilities.SetCapability("app", NotepadAppId);
+                appCapabilities.SetCapability("platformName", "Windows");
+                appCapabilities.SetCapability("deviceName", "WindowsPC");
                 session = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), appCapabilities);
                 Assert.IsNotNull(session);
                 Assert.IsNotNull(session.SessionId);
